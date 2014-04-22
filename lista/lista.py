@@ -23,6 +23,10 @@ class Lista:
         no.link = self.frente
         self.frente = no
 
+        self.tamanho += 1
+
+        del no
+
     def insereFimLista(self, info):
         no = No(info)
         ultimo = self.frente
@@ -32,6 +36,33 @@ class Lista:
 
         ultimo.link = no
 
+        self.tamanho += 1
+
+        del ultimo
+        del no
+
+    def removeInicioLista(self):
+        remover = self.frente
+        self.frente = remover.link
+
+        self.tamanho -= 1
+
+        del remover
+
+    def removeFimLista(self):
+        if (self.tamanho>1):
+            penultimo = self.frente
+
+            while (penultimo.link.link!=None):
+                penultimo = penultimo.link
+
+            ultimo = penultimo.link
+            penultimo.link = None
+        else:
+            self.frente = None
+
+        self.tamanho -= 1
+
 # Funcao principal
 def main():
     lista = Lista()
@@ -40,7 +71,9 @@ def main():
     lista.insereInicioLista(9)
     lista.insereFimLista(20)
     lista.insereInicioLista(30)
-    
+    lista.removeInicioLista()
+    lista.removeFimLista()
+
     imprime = lista.frente
 
     while (imprime!=None):
